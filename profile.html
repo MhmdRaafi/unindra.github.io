@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Unindra</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Belajar Web" class="logo">
+    </div>
+
+    <div class="nav">
+        <a href="home.html">Home</a>
+        <a href="profile.html">Profile</a>
+        <a href="akademik.html">Akademik</a>
+        <a href="organisasi.html">Organisasi</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="content">
+        <p>
+            Universitas Indraprasta PGRI, atau biasa disebut Unindra adalah salah satu 
+            Universitas swasta yang didirikan pada tahun 2004 dan disahkan kembali oleh 
+            Menteri Pendidikan Nasional RI melalui keputusan No: 142/D/O/2004 Tanggal 6 SEPTEMBER 2004.
+            Tanggal resmi tersebut adalah pengakuan pemerintah atas berdirinya Universitas Indraprasta PGRI, 
+            dan tanggal tersebut dinyatakan sebagai hari lahir (DIES NATALIS).
+        </p>
+    </div>
+
+    <h2>Ada Pertanyaan?</h2>
+
+    <form action="/submit-data" method="POST">
+        <div class="form-group">
+            <label class="label" for="nama">Name:</label>
+            <input type="text" id="nama" name="nama" placeholder="Nama*" required>
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="email">Email:</label>
+            <input type="email" id="email" name="eml" placeholder="Email*" required>
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="nomor_hp">Phone:</label>
+            <input type="tel" id="nomor_hp" name="nomor_hp" placeholder="Nomor Telepon" required>
+        </div>
+
+        <div class="form-group">
+            <label class="label" for="asal_negara">Country:</label>
+            <select id="asal_negara" name="asal_negara" required>
+                <option value="">--Pilih Negara--</option>
+                <option value="id">Indonesia</option>
+                <option value="MY">Malaysia</option>
+                <option value="SG">Singapura</option>
+                <option value="TH">Thailand</option>
+                <option value="VN">Vietnam</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="message" for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." rows="5" required></textarea>
+        </div>
+        <div class="submit">
+            <button class="button" type="submit">Submit</button>  
+        </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var input = document.querySelector("#nomor_hp");
+            var iti = window.intlTelInput(input, {
+                initialCountry: "id", 
+                preferredCountries: ["id", "MY", "SG", "TH", "VN","UK"], 
+                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+            });
+
+            var countrySelect = document.querySelector("#asal_negara");
+            countrySelect.addEventListener("change", function() {
+                var selectedCountry = countrySelect.value;
+                iti.setCountry(selectedCountry); 
+                var countryData = iti.getSelectedCountryData(); 
+                var dialCode = countryData.dialCode; 
+                input.value = "+" + dialCode + " "; 
+            });
+        });
+    </script>
+</body>
+</html>
